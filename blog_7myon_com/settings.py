@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*kf3t-@w)%aq0rzi2w9pr7)x8wi@(jfpmhwv4m2&j=tn!!xf5#'
+SECRET_KEY = 'SOmeSeCret_Key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
-    'crispy_forms',
     # Next line needs be uncommented for activation the debug_toolbar
     #    'debug_toolbar',
 ]
@@ -190,5 +189,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
