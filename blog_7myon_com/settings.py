@@ -104,7 +104,7 @@ DATABASES = {
         'NAME': 'django_blog',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'django_blog',
-        'PASSWORD': '12qwaszx',
+        'PASSWORD': '1234567',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=INNODB',
             'charset': 'utf8'
