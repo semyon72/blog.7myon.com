@@ -1,0 +1,9 @@
+{% if caption %}{% spaceless %}
+    <caption>{% spaceless %}
+    {% if caption %}
+        {{ object.caption|default:caption }}
+    {% else %}
+        {{ object.caption|default:'Item details.' }}
+    {% endif %}
+    {% endspaceless %}</caption>
+{% endspaceless %}{% endif %}

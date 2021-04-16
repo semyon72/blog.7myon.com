@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title from blog/public_base.html{% endblock %}</title>
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'font/bootstrap-icons.css' %}">
+{% endblock stylesheet %}
+{% block javascript %}
+    <script type="application/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/popper.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock javascript %}
+</head>
+<body>
+<div class="container">
+<div class="row">
+    <div class="col-12">
+    {% block navigation %}
+    {% include './public_site_nav.html' %}
+    {% endblock navigation %}
+    </div>
+</div>
+<div class="row">
+<div class="col-3">
+<aside>
+    {% block links_aside %}
+    <section>
+        Links - blog/public_base.html
+    </section>
+    {% endblock %}
+    {% block blog_aside_full %}
+    <section>
+        Blogs - blog/public_base.html
+    </section>
+    {% endblock %}
+    {% block author_aside_full %}
+    <section>
+        Authors - blog/public_base.html
+    </section>
+    {% endblock %}
+{% comment 'redundant information' %}
+    {% block blog_aside_7days %}
+    <section>
+        Most popular blogs on last week - blog/public_base.html
+    </section>
+    {% endblock %}
+    {% block blog_aside_30days %}
+    <section>
+        Most popular blogs on last month - blog/public_base.html
+    </section>
+    {% endblock %}
+    {% block blog_aside_365days %}
+    <section>
+        Most popular blogs on last year - blog/public_base.html
+    </section>
+    {% endblock %}
+{% endcomment %}
+</aside>
+</div>
+<div class="col-9 body_content">
+{% block body_content %}
+    this body_content_block inside blog/base.html
+{% endblock body_content %}
+</div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <footer>
+        {% block footer %}
+        {% endblock footer %}
+        </footer>
+    </div>
+</div>
+</div>
+</body>
+</html>

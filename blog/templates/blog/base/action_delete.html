@@ -1,0 +1,8 @@
+{% load blog_extras %}{% spaceless %}
+{% with action_url=action_delete %}
+{% if not action_url %}
+    {% change_context action_url=object.urls.delete %}
+{% endif %}
+{% include './submit_delete.html' %}
+{% endwith %}{% endspaceless %}
+

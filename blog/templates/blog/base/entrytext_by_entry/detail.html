@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../entrytext/detail_info.html' %}
+{% include './action_list.html' with action_list_label='Back to list' %}
+{% include './action_edit.html' %}
+{% include './action_create.html' %}
+{% include './action_delete.html' %}
+{% endblock %}

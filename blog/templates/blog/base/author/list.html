@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../filter_form.html' with caption='Filter for Authors' %}
+{% include '../list_table.html' with caption='List of Authors' %}
+{% include '../paginator.html' %}
+{% endblock body_content %}

@@ -1,0 +1,20 @@
+{% extends "../base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="alert alert-info" role="alert">
+{% blocktranslate trimmed with username=user.author.name %}
+    You are authenticated as "<b>{{ username }}</b>", but, probably, are not authorized to
+    access to the requested page. Would you like to login to a different account?
+{% endblocktranslate %}
+</div>
+{% endif %}
+<form action="{{ app_path }}" method="post" id="login-form">
+    {% csrf_token %}
+    {{ form.as_bootstrap4 }}
+{% include 'blog/auth/registration/submit_login.html' %}
+</form>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../entrytext/detail_info.html' %}
+<div>Do you really want to delete Text for entry</div>
+<form method="post">
+{% csrf_token %}
+{% include '../submit_delete.html' %}
+{% include './action_list.html' with action_list_label='Cancel' %}
+{% include './action_edit.html' %}
+{% include './action_create.html' %}
+</form>
+{% endblock body_content %}

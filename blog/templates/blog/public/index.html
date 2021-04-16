@@ -1,0 +1,89 @@
+{% extends '../public_base.html'  %}
+{% load static %}
+
+{% block title %}Title from blog/public/index.html{% endblock %}
+
+{% block links_aside %}
+<section class="links_aside">
+<a href="{% url 'blog:public_index' %}" class="list-group-item list-group-item-action list-group-item-primary active" role="button">
+All entries
+</a>
+</section>
+{% endblock %}
+
+{% block blog_aside_full %}
+<a href="#collapse_blog_aside_full" class="list-group-item list-group-item-action list-group-item-primary active" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapse_blog_aside_full">
+Blogs with recently added entries
+</a>
+<div class="collapse show" id="collapse_blog_aside_full">
+    {{ aside_content.blog_aside_full }}
+</div>
+{% endblock %}
+
+{% block author_aside_full %}
+<a href="#collapse_author_aside_full" class="list-group-item list-group-item-action list-group-item-primary active" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapse_author_aside_full">
+Authors with recently added entries
+</a>
+<div class="collapse show" id="collapse_author_aside_full">
+    {{ aside_content.author_aside_full }}
+</div>
+{% endblock %}
+{% comment 'redundant information' %}
+{% block blog_aside_7days %}
+<a href="#collapse_blog_aside_7days" class="list-group-item list-group-item-action active" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse_blog_aside_7days">
+Blogs with new entries during last 7 days
+</a>
+<div class="collapse" id="collapse_blog_aside_7days">
+    {{ aside_content.blog_aside_7days }}
+</div>
+{% endblock %}
+{% block blog_aside_30days %}
+<a href="#collapse_blog_aside_30days" class="list-group-item list-group-item-action active" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse_blog_aside_30days">
+Blogs with new entries during last 30 days
+</a>
+<div class="collapse" id="collapse_blog_aside_30days">
+    {{ aside_content.blog_aside_30days }}
+</div>
+{% endblock %}
+{% block blog_aside_365days %}
+<a href="#collapse_blog_aside_365days" class="list-group-item  list-group-item-action active" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse_blog_aside_365days">
+Blogs with new entries during last 365 days
+</a>
+<div class="collapse" id="collapse_blog_aside_365days">
+    {{ aside_content.blog_aside_365days }}
+</div>
+{% endblock %}
+{% endcomment %}
+{% block body_content %}
+{% include './index_content_info.html' %}
+{% if page_obj is not None %}
+{% for entry in page_obj.object_list %}
+    {{ entry.entry_detail_content }}
+{% endfor %}
+{% include '../base/paginator.html' %}
+{% else %}
+{{ object.entry_detail_content }}
+{% endif %}
+{% endblock body_content %}
+
+{% block stylesheet %}{{ block.super }}
+    <link rel="stylesheet" href="{% static 'ckeditor/plugins/codesnippet/lib/highlight/styles/googlecode.css' %}">
+{% endblock stylesheet %}
+{% block javascript %}{{ block.super }}
+    <script type="application/javascript" src="{% static 'ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js' %}"></script>
+    <script type="application/javascript">
+        (function ($){
+            let highlighter_selector = 'article section.card-body div.body-text pre code'
+            $(document).ready(function(){
+                $(highlighter_selector).each(
+                    function(idx){
+                        hljs.highlightBlock(this)
+                    }
+                )
+            })
+        })(jQuery)
+    </script>
+{% endblock javascript %}
+
+
+

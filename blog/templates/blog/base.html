@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title from blog/base.html{% endblock %}</title>
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'font/bootstrap-icons.css' %}">
+{% endblock stylesheet %}
+{% block javascript %}
+    <script type="application/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/popper.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock javascript %}
+</head>
+<body>
+<div class="container">
+<div class="row">
+    <div class="col-12">
+        <header>Some header</header>
+    </div>
+</div>
+<div class="row">
+<div class="col-2">
+<aside>
+{% include './site_nav.html' %}
+</aside>
+</div>
+<div class="col-10 body_content">
+{% block body_content %}
+    this body_content_block inside blog/base.html
+{% endblock body_content %}
+</div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <footer>Some Footer</footer>
+    </div>
+</div>
+</div>
+</body>
+</html>

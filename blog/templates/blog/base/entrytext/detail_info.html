@@ -1,0 +1,19 @@
+<table class="table">
+    {% include '../caption.html' with caption=caption|default:'Details of Text for entry'%}
+    <tbody>
+        <tr>
+            <th>{{ object.fields.body_text.verbose_name|capfirst }}</th>
+            <td>{{ object.fields.body_text.value }}</td>
+        </tr>
+        <tr>
+            <th>
+                {{ object.fields.entry.verbose_name|capfirst }}
+            </th>
+            <td>
+{% with object=object.entry %}
+{% include '../item_table.html'%}
+{% endwith %}
+            </td>
+        </tr>
+    </tbody>
+</table>

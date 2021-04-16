@@ -1,0 +1,9 @@
+{% extends '../base_site.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body_content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_bootstrap4 }}
+    {% include './submit_signup.html' %}
+    </form>
+{% endblock body_content %}

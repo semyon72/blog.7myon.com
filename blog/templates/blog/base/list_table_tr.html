@@ -1,0 +1,7 @@
+<tr>
+    <th scope="row">{{ row_number }}</th>{% for field in object %}{% if not field.is_pk and field.name is not None %}
+    <td>{% if field.value is not None %}{{ field.value }}{% endif %}</td>{% endif %}{% endfor %}
+    <td>
+        {% include './actions_require_id.html' %}
+    </td>
+</tr>

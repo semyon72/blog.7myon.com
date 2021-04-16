@@ -1,0 +1,18 @@
+<div class="card">
+<div class="card-header">{% include './caption.html' %}</div>
+<div class="card-body">
+<table class="table">
+<tbody>
+{% for field_name, field in object.fields.items %}
+{% if not field.is_pk and field.name is not None %}
+<tr>{% spaceless %}
+    <th align="left">{{ field.verbose_name }}</th>
+    <td align="left">{% if field.value is not None %}{{ field.value }}{% endif %}</td>
+</tr>
+{% endspaceless %}
+{% endif %}
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>

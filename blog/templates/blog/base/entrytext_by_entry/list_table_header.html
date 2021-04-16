@@ -1,0 +1,7 @@
+<thead>
+<tr>
+    <th>#</th>
+{% for field in object %}{% if not field.is_pk and field.name is not None and field.name != 'entry' %}<th>{{ field.verbose_name }}</th>{% endif %}{% endfor %}
+    <th>Action</th>
+</tr>
+</thead>

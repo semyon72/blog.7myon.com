@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+
+Any text that invisible because not inside block
+
+{% block title %}Title in blog/auth/auth_base.html{% endblock %}
+
+{% block body_content %}
+    {% block content %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,6 @@
+<h5>{{ caption|default:'Filter' }}</h5>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_bootstrap4 }}
+    {% include './submit_filter.html' %}
+</form>

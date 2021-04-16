@@ -1,0 +1,22 @@
+{% with fields=object.fields %}
+<tr>
+    <th scope="row" rowspan="2">{{ forloop.counter }}</th>{# if field.name is None it means the field is not editable cause probably annotation. #}
+    {% for field in fields.values %}{% if not field.is_pk and field.name is not None %}<td>{{ field.value }}</td>{% endif %}{% endfor %}
+    <td>
+        {% include '../actions_require_id.html'%}
+    </td>
+</tr>
+<tr>
+    <td colspan="{{ fields|length|add:1 }}">
+        <h5>Available texts</h5>
+        {% for entrytext in object.entrytext_set.all  %}
+            <a href="{{ entrytext.urls.read }}" class="list-group-item list-group-item-action"><i class="bi bi-card-text"></i> {{ entrytext }}</a>
+{#            {% include '../action_details.html' with action_read=entrytext.urls.read action_read_label=entrytext %}#}
+        {% empty %}
+            No texts
+        {% endfor %}
+        <a class="btn btn-sm btn-outline-info" href="{{ object.urls.related_list }}"><i class="bi bi-card-text"></i>  All text for entry</a>
+        <a class="btn btn-sm btn-outline-primary" href="{{ object.urls.related_create }}"><i class="bi bi-plus-square"></i> Add text for entry</a>
+    </td>
+</tr>
+{% endwith %}

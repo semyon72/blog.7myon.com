@@ -1,0 +1,59 @@
+{% load blog_extras %}
+{#  object is entry model instance #}
+{% get_querystring page=None as querystring %}
+<article class="card" data-entry-id="{{ object.pk }}" data-entry-url="{{ entry_url }}">
+    <section class="card-title entry-info">
+        {{ object.fields.blog.verbose_name }}: {% if view_names.blog %}<a href="{{ view_names.blog.url }}{{ querystring }}" class="entry-blog">{{ object.fields.blog.value }}</a>{% else %}{{ object.fields.blog.value }}{% endif %}
+        {{ object.fields.author.verbose_name }}: {% if view_names.author %}<a href="{{ view_names.author.url }}{{ querystring }}" class="entry-author">{{ object.fields.author.value }}</a>{% else %}{{ object.fields.author.value }}{% endif %}
+        {{ object.fields.coauthors.verbose_name }}: {% for coauthor in object.coauthors.all %}{% spaceless %}
+        {% if view_names.author %}<a href="{% url view_names.author.view_name id=coauthor.pk %}{{ querystring }}" class="entry-coauthors">{{ coauthor.fields.name.value|default:'-----' }}</a>{% else %}{{ coauthor.fields.name.value|default:'-----' }}{% endif %}
+        {% endspaceless %}{% empty %}{% spaceless %}
+        <span>-----</span>
+        {% endspaceless %}{% endfor %}
+        <span class="entry-published">{{ object.fields.pub_date.verbose_name }}: {{ object.fields.pub_date.value }}</span>
+        {% if object.fields.rank_info %}
+        <div class="found-info">
+            <strong>Found in:</strong>
+            {% if object.fields.rank_info.value.found_entries > 0 %}<span class="badge badge-info">headline</span>{% endif %}
+            {% if object.fields.rank_info.value.found_entrytexts > 0 %}<span class="badge badge-info">{{ object.fields.rank_info.value.found_entrytexts }} texts</span>{% endif %}
+        </div>
+        {% endif %}
+    </section>
+    <header class="card-header entry-headline">{{ object.fields.headline.value }}</header>
+    {% with entrytexts_count=entrytext_page_obj.paginator.num_pages %}
+    <section class="card-body entry-text">
+        {% if entrytexts_count > 0 and entrytext_page_obj.object_list|length > 0 %}
+{#        <header>Text #{{ entrytext_page_obj.number }}</header>#}
+        {% with entrytext=entrytext_page_obj.object_list.0 %}
+        <div class="body-text">
+        {{ entrytext.fields.body_text.value }}
+            {% with collapse_id='body_text_highlighted_'|concat:entrytext.pk %}
+            <div class="d-flex justify-content-between mt-2">
+            {% if view.get_truncate_text_to_length > 0  %}
+                {% with page_kwarg=view.page_kwarg truncate_length_kwarg=view.truncate_text_to_length_url_kwarg %}
+                <a class="btn btn-sm btn-outline-info" href="{{ view_names.entry.url }}{% get_querystring __page_kwarg='entrytext_page_obj__number' __truncate_length_kwarg=None q=None %}"><i class="bi bi-card-text"></i> Details</a>
+                {% endwith %}
+            {% endif %}
+            {% if entrytext.fields.body_text_highlighted %}
+                  <a class="btn btn-sm btn-outline-info" data-toggle="collapse" href="#{{ collapse_id }}" role="button" aria-expanded="false" aria-controls="{{ collapse_id }}">
+                    Show/hide found
+                  </a>
+            {% endif %}
+            </div>
+            <div class="collapse my-2" id="{{ collapse_id }}">
+              <div class="card card-body d-block">
+            {{ entrytext.fields.body_text_highlighted.value }}
+              </div>
+            </div>
+            {% endwith %}
+        </div>
+        {% endwith %}
+        {% else %}
+            :( No texts for this entry.
+        {% endif %}
+    </section>
+    {% if entrytexts_count > 1 %}
+    {% include '../base/paginator.html' with page_obj=entrytext_page_obj base_url=view_names.entry.url page_number_label=view.page_kwarg|title %}
+    {% endif %}
+    {% endwith %}
+</article>

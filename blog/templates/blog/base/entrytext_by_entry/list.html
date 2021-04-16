@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../detail.html' with object=current_entry caption='Details of Entry&#x27s item' %}
+{#action_create_template='blog/base/entrytext_by_entry/action_create.html' #}
+{% with action_create=current_entry.urls.related_create list_table_header='blog/base/entrytext_by_entry/list_table_header.html' list_table_tr='blog/base/entrytext_by_entry/list_table_tr.html'  %}
+{% include '../list_table.html' with additem_label='Add text' caption='List of texts for entry' object_list=page_obj.object_list %}
+{% endwith %}
+{% include '../paginator.html' %}
+{% endblock body_content %}

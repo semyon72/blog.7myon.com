@@ -1,0 +1,19 @@
+{% load blog_extras %}
+{% get_querystring as querystring %}
+<section class="{{ blog_aside_class|default:'blog_aside' }}">
+    {% for object in object_list %}
+    {% if forloop.first %}
+    <div class="list-group mb-1">
+    {% endif %}
+    {% url 'blog:public_index_blog' id=object.pk as public_index_blog_url %}
+    <a href="{{ public_index_blog_url }}{{ querystring }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center{% if request.path == public_index_blog_url %} active{% endif %}">
+    {{ object.name }}<span class="badge badge-info">{{ object.entries_count|default:'0' }}</span>
+    </a>
+    {% if forloop.last %}
+    </div>
+    {% endif %}
+    {% empty %}
+        Blog aside content is empty
+    {% endfor %}
+    {% include '../base/paginator.html'  %}
+</section>

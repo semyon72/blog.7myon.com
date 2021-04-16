@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../filter_form.html' with caption='Filters for Texts of entries' %}
+<table class="table">
+<caption>List of Texts of entries</caption>
+{% regroup page_obj.object_list by entry as entry_list %}
+{%  for entry in entry_list %}
+{% if forloop.counter0 == 0 %}
+<thead class="thead-light">
+<tr>
+    <th scope="col">#</th>
+    <th scope="col">{{ entry.list.0.fields.body_text.verbose_name|capfirst }}</th>
+    <th scope="col">{{ entry.grouper.fields.headline.verbose_name|capfirst }}</th>
+    <th scope="col">Action</th>
+</tr>
+</thead>
+<tbody>
+{% endif %}
+{# data row #}
+{% with entrytext_cnt=entry.list|length %}
+{% for entrytext in entry.list %}
+<tr>
+    <th scope="row">{{ entrytext.object_index }}</th>
+    <td>{# body of  entrytext#}
+        {{ entrytext.body_text }}
+    </td>
+    {% if forloop.first  %}
+    <td{% if entrytext_cnt > 1 %} rowspan="{{ entrytext_cnt }}" {% endif %}>{# body of  entry#}
+        {{ entry.grouper }}
+    </td>
+    {% endif %}
+    <td>
+        {% include '../actions_require_id.html' with object=entrytext %}
+    </td>
+</tr>
+{% endfor %}
+{% endwith %}
+{# END data row #}
+{% if forloop.last %}
+</tbody>
+{% endif %}
+{% empty %}
+{% include '../list_empty_tr.html' %}
+{% endfor %}
+</table>
+{% include '../action_create.html' with action_create=page_obj.object_list.model.urls.create action_create_label=additem_label  %}
+{% include '../paginator.html' %}
+{% endblock body_content %}

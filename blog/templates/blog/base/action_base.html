@@ -1,0 +1,7 @@
+{% with action_button_class=action_button_class|default:'btn-sm btn-outline-primary' %}
+{% if action_url %}
+<a class="btn {{ action_button_class }}" href="{{ action_url }}">{{ action_extra_icons }}<i class="bi {{ action_icon_class }}"></i> {{ action_label }}</a>
+{% else %}
+<button{% if action_element_name %} name="{{ action_element_name }}"{% endif %} class="btn {{ action_button_class }}" type="submit" value="{{ action_label }}">{{ action_extra_icons }}<i class="bi {{ action_icon_class }}"></i> {{ action_label }}</button>
+{% endif %}
+{% endwith %}

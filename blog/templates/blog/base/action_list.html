@@ -1,0 +1,7 @@
+{% load blog_extras %}{% spaceless %}
+{% with action_url=action_list %}
+{% if not action_url %}
+    {% change_context action_url=object.urls.list %}
+{% endif %}
+{% include './action_base.html' with action_button_class='btn-sm btn-outline-primary' action_label=action_list_label|default:'List' action_icon_class='bi-backspace' action_extra_icons='<i class="bi bi-list"></i>'|safe %}
+{% endwith %}{% endspaceless %}

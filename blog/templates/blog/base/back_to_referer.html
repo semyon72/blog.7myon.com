@@ -1,0 +1,5 @@
+{% with referer=request.headers.referer %}
+{% if referer %}
+<a href="{{ referer }}">Back to last visited place</a>
+{% endif %}
+{% endwith %}

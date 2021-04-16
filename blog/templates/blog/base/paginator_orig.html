@@ -1,0 +1,18 @@
+{% load blog_extras %}
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="pagination">
+<span class="step-links">
+{% if page_obj.has_previous %}
+<a href="{{ base_url }}{% get_querystring view__page_kwarg=1%}">&laquo; first</a>
+<a href="{{ base_url }}{% get_querystring view__page_kwarg='page_obj__previous_page_number' %}">previous</a>
+{% endif %}
+<span class="current">
+{{ page_number_label|default:'Page' }} {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+</span>
+{% if page_obj.has_next %}
+<a href="{{ base_url }}{% get_querystring view__page_kwarg='page_obj__next_page_number' %}">next</a>
+<a href="{{ base_url }}{% get_querystring view__page_kwarg='page_obj__paginator__num_pages' %}">last &raquo;</a>
+{% endif %}
+</span>
+</div>
+{% endif %}

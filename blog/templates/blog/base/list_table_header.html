@@ -1,0 +1,8 @@
+<thead class="thead-light">
+<tr>
+    <th scope="col">#</th>{% for field in object %}{% if not field.is_pk and field.name is not None %}
+    <th scope="col">{{ field.verbose_name|capfirst }}</th>{% endif %}{% endfor %}
+    <th scope="col">Action</th>
+</tr>
+</thead>
+

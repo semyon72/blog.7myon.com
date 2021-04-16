@@ -1,0 +1,7 @@
+<form method="post">
+{% csrf_token %}
+{% include './item_table.html' with caption=caption|default:'Do you really want to delete item?' %}
+{% include './submit_delete.html' with input_value='Delete' %}
+{% include './action_list.html' with action_list_label='Cancel' %}
+{#{% include './back_to_referer.html' %}#}
+</form>

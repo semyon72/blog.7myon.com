@@ -1,0 +1,9 @@
+{% with fields=object.fields %}
+<tr>
+    <th scope="row">{{ forloop.counter }}</th>
+    {% for field in fields.values %}{% if not field.is_pk and field.name is not None and field.name != 'entry' %}<td>{{ field.value }}</td>{% endif %}{% endfor %}
+    <td>
+    {% include './actions_require_id.html' %}
+    </td>
+</tr>
+{% endwith %}

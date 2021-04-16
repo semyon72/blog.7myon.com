@@ -1,0 +1,14 @@
+{% extends "../base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% translate 'Home' %}</a></div>{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}{% spaceless %}
+<div class="alert alert-success" role="alert">
+{% translate "Thanks for spending some quality time with the Web site today." %}
+</div>
+{% url 'blog:login' as action_url %}
+{% translate 'Log in again' as action_label %}
+{% include "blog/auth/registration/submit_login.html" %}
+{% endspaceless %}{% endblock %}

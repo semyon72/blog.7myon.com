@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block body_content %}
+{% include '../filter_form.html' with caption='Filters for Entry' %}
+{% with list_table_header='blog/base/entry/list_table_header.html' list_table_tr='blog/base/entry/list_table_tr.html'  %}
+{% include '../list_table.html' with caption='List of Entries' object_list=page_obj.object_list %}
+{% endwith %}
+{% include '../paginator.html' %}
+{% endblock body_content %}

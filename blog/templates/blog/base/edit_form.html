@@ -1,0 +1,11 @@
+{% if form.is_bound and not form.has_changed %}
+<h3>Nothing changed</h3>
+{% endif %}
+<form method="post">
+{% csrf_token %}
+<h5>{{ caption|default:'Edit form.' }}</h5>
+{{ form.as_bootstrap4 }}
+{% include './submit_edit.html' with action_update_label='Save' %}
+{% include './action_list.html' with action_list=form.instance.urls.list action_list_label=action_list_label|default:'Cancel' %}
+{#{% include './back_to_referer.html' %}#}
+</form>

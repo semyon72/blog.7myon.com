@@ -1,0 +1,17 @@
+<table class="table" width="100%">
+<caption>{{ caption|default:'List of items' }}</caption>
+{%  for object in page_obj.object_list %}
+{% if forloop.counter0 == 0 %}
+{% include list_table_header|default:'blog/base/list_table_header.html' %}
+<tbody>
+{% endif %}
+{% include list_table_tr|default:'blog/base/list_table_tr.html' with row_number=forloop.counter object=object %}
+{% if forloop.last %}
+</tbody>
+{% endif %}
+{% empty %}
+{% include './list_empty_tr.html' %}
+{% endfor %}</table>
+{% with action_create=action_create|default:page_obj.object_list.model.urls.create action_create_label='Create item' %}
+{% include action_create_template|default:'blog/base/action_create.html' %}
+{% endwith %}

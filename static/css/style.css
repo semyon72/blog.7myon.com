@@ -1,0 +1,51 @@
+html {
+    font-size: 0.84rem;
+}
+
+form {
+    margin-bottom: .8rem;
+}
+
+article {
+    /*border: #cdcaca solid thin;*/
+    margin: .66rem;
+    margin-left: 0px;
+    padding: .66rem;
+}
+
+section.entry-text div.body-text a.entry-text-detail {
+    margin-left: 1em;
+}
+
+aside .blog_aside .list-group-item:first-child, aside .author_aside .list-group-item:first-child {
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+}
+
+aside section.links_aside a.list-group-item.list-group-item-action,
+aside a.list-group-item.list-group-item-action[role=button][data-toggle=collapse]
+{
+    margin-top: 0.5rem; /* same as bootstrap mt-2 */
+    padding-left: 0.5rem; /* same as bootstrap pl-2 */
+    padding-rightt: 0.5rem; /* same as bootstrap pr-2 */
+}
+
+article section.card-title a.entry-coauthors {
+    margin-right: 0.25rem;
+}
+
+article section.card-title a.entry-coauthors:last-of-type {
+    margin-right: revert;
+}
+
+span.found-text {
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    background-color: #ffffe4;
+}
+
+span.truncated-text {
+    color: #e72121;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}

@@ -1,0 +1,10 @@
+{% extends "../base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body_content %}
+<div class="alert alert-danger" role="alert">
+    {% translate "The registration confirm link was invalid or user hasn't been registered yet." %}
+    {% translate "Use copy+paste into browser's url string to avoid mistakes." %}
+</div>
+{% endblock %}

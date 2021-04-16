@@ -1,0 +1,7 @@
+{% load blog_extras %}{% spaceless %}
+{% with action_url=action_read %}
+{% if not action_url %}
+    {% change_context action_url=object.get_absolute_url %}
+{% endif %}
+{% include './action_base.html' with action_button_class='btn-sm btn-outline-info' action_label=action_read_label|default:'Details' action_icon_class='bi-card-text' %}
+{% endwith %}{% endspaceless %}

@@ -1,0 +1,19 @@
+{% extends '../../base.html' %}
+{% load static %}
+
+{% block javascript %}
+    <script type="application/javascript" src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
+
+{% block body_content %}
+{% include '../detail.html' with object=form.instance.entry caption='Details of Entry' %}
+<form method="post">
+{% csrf_token %}
+{{ form.as_bootstrap4 }}
+<script type="application/javascript">
+    CKEDITOR.replace('id_body_text', {});
+</script>
+{% include '../submit_edit.html' with action_update_label='Save' %}
+{% include './action_list.html' with object=form.instance action_list_label='Back to list' %}
+</form>
+{% endblock body_content %}

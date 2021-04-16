@@ -1,0 +1,8 @@
+{% extends "../base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body_content %}
+<h3>{% translate "Confirmation email was send to you." %}
+{% translate "You must use confirmation link for confirmation your email address and registration in whole." %}</h3>
+{% endblock %}

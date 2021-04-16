@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="application/javascript" src="{% static 'ckeditor/ckeditor.js' %}"></script>
+{% endblock %}
+
+{% block body_content %}
+{% include '../edit_form.html' with caption='Edit text of Entry' %}
+<script type="application/javascript">
+    CKEDITOR.replace('id_body_text');
+</script>
+{% endblock body_content %}
